@@ -1,0 +1,7 @@
+<product>
+  <title>{{ include.product.title }}</title>
+  <url>{{ include.product.page_link }}</url>
+  <date>{{ include.product.date | date: "%b %-d, %Y"}}</date>
+  <price>{{ include.product.price.formatted }}</price>
+  <cache>{{ include.product.from_cache }}</cache>
+</product>

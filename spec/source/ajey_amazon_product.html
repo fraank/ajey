@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<results>
+  {% ajey_amazon_product 0596516177 %}
+    <product>
+      <title>{{ product.title }}</title>
+      <url>{{ product.page_link }}</url>
+      <date>{{ product.date | date: "%b %-d, %Y"}}</date>
+      <price>{{ product.price.formatted }}</price>
+      <cache>{{ product.from_cache }}</cache>
+    </product>
+  {% endajey_amazon_product %}
+
+  {% ajey_amazon_product 0596516177 %}
+    <product>
+      <title>{{ product.title }}</title>
+      <url>{{ product.page_link }}</url>
+      <date>{{ product.date | date: "%b %-d, %Y"}}</date>
+      <price>{{ product.price.formatted }}</price>
+      <cache>{{ product.from_cache }}</cache>
+    </product>
+  {% endajey_amazon_product %}
+
+</results>

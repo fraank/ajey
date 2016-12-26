@@ -1,0 +1,26 @@
+---
+layout: default
+---
+<results>
+  {% ajey_amazon_product "0596516177" %}
+    {% include product.html product=product %}
+  {% endajey_amazon_product %}
+
+  {% ajey_amazon_product "B00DER1TYW" %}
+    {% include product.html product=product %}
+  {% endajey_amazon_product %}
+
+  {% ajey_amazon_product "0596516177" %}
+    {% include product.html product=product %}
+  {% endajey_amazon_product %}
+
+  {% assign product_id = "1617291692" %}
+  {% ajey_amazon_product product_id %}
+    {% include product.html product=product %}
+  {% endajey_amazon_product %}
+
+  {% assign product_id = "1491926015" %}
+  {% ajey_amazon_product product_id %}
+    {% include product.html product=product %}
+  {% endajey_amazon_product %}
+</results>

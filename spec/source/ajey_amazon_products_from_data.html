@@ -1,0 +1,10 @@
+---
+layout: default
+---
+<results>
+  {% for product_id in site.data.products.products %}
+    {% ajey_amazon_product product_id.amazon_id %}
+      {% include product.html product=product %}
+    {% endajey_amazon_product %}
+  {% endfor %}
+</results>
