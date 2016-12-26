@@ -13,16 +13,23 @@ module Jekyll
       self.basename = File.basename(@name)
 
       # this has to be the source file
-      source_dir = File.dirname(product_data['template'])
-      source_file = File.basename(product_data['template'])
+      if File.exists?(site.in_theme_dir(product_data['template']))
+        template_path = site.in_theme_dir(product_data['template'])
+      else File.exists?(site.in_source_dir(product_data['template']))
+        template_path = site.in_source_dir(product_data['template'])
+      end
+
+      source_dir = File.dirname(template_path)
+      source_file = File.basename(template_path)
       self.read_yaml(source_dir, source_file)
       
+      self.data = self.data.merge(product_data)
       if product_data['title'] && product_data['title'] != ""
         self.data['title'] = product_data['title']
       else 
         self.data['title'] = product_data['amazon_id']
       end
-      
+
       self.data['amazon_id'] = product_data['amazon_id']
     end
 
