@@ -77,7 +77,7 @@ module Jekyll
         product = {}
         if product_info
           product['language'] = @config['language']
-
+          product['id'] = "amazon_#{product_id}"
           #p product_info['ItemAttributes']
           product['title'] = product_info['ItemAttributes']['Title'].gsub(/<\/?[^>]*>/, "") if product_info.dig('ItemAttributes', 'Title')
           product['features'] = product_info['ItemAttributes']['Feature'] if product_info.dig('ItemAttributes', 'Feature')

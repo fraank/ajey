@@ -13,9 +13,9 @@ module Jekyll
       self.basename = File.basename(@name)
 
       # this has to be the source file
-      if File.exists?(site.in_theme_dir(product_data['template']))
+      if site.in_theme_dir(product_data['template']) && File.exists?(site.in_theme_dir(product_data['template']))
         template_path = site.in_theme_dir(product_data['template'])
-      else File.exists?(site.in_source_dir(product_data['template']))
+      else site.in_source_dir(product_data['template']) && File.exists?(site.in_source_dir(product_data['template']))
         template_path = site.in_source_dir(product_data['template'])
       end
 
@@ -24,6 +24,7 @@ module Jekyll
       self.read_yaml(source_dir, source_file)
       
       self.data = self.data.merge(product_data)
+
       if product_data['title'] && product_data['title'] != ""
         self.data['title'] = product_data['title']
       else 

@@ -23,17 +23,23 @@ module Jekyll
       end
       
       # use cache if available for product
-      if context.registers[:site].data['ajey_products'] && context.registers[:site].data['ajey_products'][@product_id]
-        context['product'] = context.registers[:site].data['ajey_products'][@product_id]
+      if context.registers[:site].data['_ajey_products'] && context.registers[:site].data['_ajey_products'][@product_id]
+        context['product'] = context.registers[:site].data['_ajey_products'][@product_id]
         context['product']['from_cache'] = true
       
       # load and save cache
       else
         @ajay = Jekyll::Ajey.new(context.registers[:site].config['ajey'], @language)
         context['product'] = @ajay.get_amazon_product(@product_id)
-        context.registers[:site].data['ajey_products'] = {} unless context.registers[:site].data['ajey_products']
-        context.registers[:site].data['ajey_products'][@product_id] = context['product']
+        context.registers[:site].data['_ajey_products'] = {} unless context.registers[:site].data['_ajey_products']
+        context.registers[:site].data['_ajey_products'][@product_id] = context['product']
         context['product']['from_cache'] = false
+        
+        # check if an extra page for product exists and if neccessary add link to product
+        if context.registers[:site].data['_ajay_product_pages'] && context.registers[:site].data['_ajay_product_pages']["#{context['product']['id']}"] && context.registers[:site].data['_ajay_product_pages']["#{context['product']['id']}"] != ""
+          context['product']['page_link'] = "/" + context.registers[:site].data['_ajay_product_pages']["#{context['product']['id']}"]
+        end
+
       end
 
       return super
