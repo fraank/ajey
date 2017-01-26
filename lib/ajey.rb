@@ -74,8 +74,8 @@ module Jekyll
         product_info = product['ItemLookupResponse']['Items']['Item']
         
         # basic information         
-        product = {}
         if product_info
+          product = {}
           product['language'] = @config['language']
           product['id'] = "amazon_#{product_id}"
           #p product_info['ItemAttributes']
@@ -97,7 +97,12 @@ module Jekyll
           product['price']['amount'] = product_info['OfferSummary']['LowestNewPrice']['Amount'] if product_info.dig('OfferSummary', 'LowestNewPrice', 'Amount')
           product['price']['formatted'] = product_info['OfferSummary']['LowestNewPrice']['FormattedPrice'] if product_info.dig('OfferSummary', 'LowestNewPrice', 'FormattedPrice')
           product['price']['currency'] = product_info['OfferSummary']['LowestNewPrice']['CurrencyCode'] if product_info.dig('OfferSummary', 'LowestNewPrice', 'CurrencyCode')
+        else
+          Jekyll.logger.error "Product '#{product_id}' not valid."
         end
+        Jekyll.logger.info "Product '#{product_id}' [#{product['title']}] processed."
+      else
+        Jekyll.logger.error "Product '#{product_id}' not found."
       end
 
       return product
